@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
+	
+	<script src="posSave.js"></script>
+    <script src="script.js"></script>
+    <script src="kinema.js"></script>
+    <script src="portal.js"></script>
+	<script src="robot.js"></script>
+  </head>
+  <body>
+    <a-scene id = "scene">
+
+      <a-assets>
+        <audio id="fireBlue" src="audio/FireBlue.mp3" preload="auto" volume=0.5 ></audio>
+        <audio id="fireOrange" src="audio/FireOrange.mp3" preload="auto" volume=0.5></audio>
+        <audio id="teleport" src="audio/teleport.mp3" preload="auto"></audio>
+		<audio id="caught" src="audio/caught.mp3" preload="auto"></audio>
+		<audio id="applause" src="audio/applause.mp3" preload="auto"></audio>
+		
+        
+		<img id="wall" src="pic/wall.jpg">
+        <img id="portal_gun" src="pic/portal_gun.png">
+		<img id = "sky" src = "pic/sky.jpg">
+		<img id = "screenshot" src = "pic/screenshot.png">
+		<img id = "plate" src = "pic/MetalPlates.jpg">
+		<img id = "moving" src = "pic/movingplates.jpg">
+		
+ 		
+		<video id="bluePortalVid" src="vid/bluePortalVid.mp4" autoplay loop="true" preload="auto" muted></video>
+		<video id="orangePortalVid" src="vid/orangePortalVid.mp4" autoplay loop="true" preload="auto" muted></video>
+		
+		<a-asset-item id="console" src="gltf/combine_console/scene.gltf" preload = "auto"></a-asset-item>
+		<a-asset-item id="robot" src="gltf/autonomous_robot_sweeper/scene.gltf" preload = "auto"></a-asset-item>
+		<a-asset-item id="portal_cube" src="gltf/portal_cube/scene.gltf" preload = "auto"></a-asset-item>
+		<a-asset-item id="trophy" src="gltf/trophy/scene.gltf" preload = "auto"></a-asset-item>
+      </a-assets>
+
+		
+		  <a-sky src = "#sky" ></a-sky>	
+ 
+		  <a-plane static-body  visible="" rotation="-90 0 0" side="double"  position="-0.5 0 -6" width="23" height="10" depth = "3" src="#plate" repeat="2 1"></a-plane>
+
+          <a-plane static-body  visible="" rotation="-90 0 0" side="double"  position="-0.5 0 15" width="23" height="10" depth = "3" src="#plate" repeat="2 1"></a-plane>
+          <a-plane static-body  visible="" rotation="-90 0 0" side="double"  position="-0.5 -4 25" width="23" height="10" depth = "3" src="#plate" repeat="2 1"></a-plane>
+
+          <a-plane static-body  visible="" rotation="-90 0 0" side="double"  position="-0.5 8 34.5" width="23" height="9" depth = "3" src="#plate" repeat="2 1"></a-plane>
+          <a-plane static-body  visible="" rotation="-90 0 0" side="double"  position="6 8 50" width="10" height="22" depth = "3" src="#plate" repeat="1 2"></a-plane>
+
+
+
+          <a-plane static-body  visible="" rotation="-90 0 0" side="double"  position="-0.5 20 46" width="23" height="30" depth = "3" src="#plate" repeat="2 1"></a-plane>
+          <a-plane static-body  visible="" rotation="-90 0 0" side="double"  position="-0.5 -8 4.5" width="23" height="11" depth = "3" src="#plate" repeat="2 1"></a-plane>
+	  
+	  <a-entity>
+            <a-box position="-2.5 4 50 " src="#wall" width="7" height="8" depth="0.1" static-body></a-box>
+      </a-entity>
+      <a-entity>
+            <a-box position="-5.5 4 39 " src="#wall" width="13" height="8" depth="0.1" static-body></a-box>
+      </a-entity>
+      <a-entity>
+            <a-box position="-5.5 4 61 " src="#wall" width="13" height="8" depth="0.1" static-body></a-box>
+      </a-entity>
+
+    <a-plane static-body  rotation="-90 0 0" visible side="double" position="-13 4 50" width="8" height="5" opacity="0.5"
+    animation="property: position; to: '-13 4 50'; dur: 5000; easing: linear; loop: true; dir: alternate">
+    </a-plane>  
+
+	<a-box position="-5 1 -3" gltf-model = "#portal_cube" scale = "0.5 0.5 0.5"></a-box>
+		  
+	<a-entity>
+	
+
+			<a-plane static-body  src="#plate" position="0 8 96" rotation = "90 0 0" width="23" height = "70" side="double" repeat = "1 3"></a-plane>	
+
+			<a-box src="#wall" static-body position="11 10 96" rotation="0 90 0" depth="0.1" width="70" height="10" repeat="2 1"></a-box>
+			<a-box src="#wall" static-body position="-12 10 96" rotation="0 90 0" depth="0.1" width="70" height="10" repeat="2 1"></a-box>
+
+
+			<a-box src="#wall" static-body position="0 10 131"  depth="0.1" width="28" height="10" repeat="2 1"></a-box>
+
+
+
+            <a-box position="11 4 4.5" rotation="0 90 0" src="#wall" width="31" height="8" depth="0.1" static-body repeat="2 1"></a-box>
+
+            <a-box position="-12 4 4.5 " rotation="0 90 0" src="#wall" width="31" height="8" depth="0.1" static-body repeat="2 1"></a-box>
+
+            <a-box position="-0.5 4 -11"  src="#wall" width="23" height="8" depth="0.1" static-body repeat="2 1"></a-box>
+
+
+
+
+
+            <a-box position="11 -4 4.5 " rotation="0 90 0" src="#wall" width="11" height="8" depth="0.1" static-body repeat="2 1" repeat="2 1"></a-box>
+            <a-box position="-12 -4 4.5 " rotation="0 90 0" src="#wall" width="11" height="8" depth="0.1" static-body repeat="2 1" repeat="2 1"></a-box>
+
+
+
+
+            <a-box position="-0.5 -4 10"  src="#wall" width="23" height="8" depth="0.1" static-body repeat="2 1" repeat="2 1"></a-box>
+
+            <a-box position="-0.5 -4 -1"  src="#wall" width="23" height="8" depth="0.1" static-body repeat="2 1" repeat="2 1"></a-box>
+
+
+
+            <a-box position="-0.5 -2 20"  src="#wall" width="23" height="4" depth="0.1" static-body repeat="2 1" repeat="2 1"></a-box>
+
+            <a-box position="-0.5 2 30"  src="#wall" width="23" height="12" depth="0.1" static-body repeat="2 1" repeat="2 1"></a-box>
+
+
+
+
+      <!-- Wall with Door -->
+            <a-box src="#wall" position="-0.5 6 20" width="5" height="3.8" depth="0.1" static-body repeat="2 1"></a-box>
+
+
+            <a-box position="6.5 4 20"  src="#wall" width="9" height="8" depth="0.1" static-body repeat="2 1"></a-box>
+
+            <a-box position="-7.5 4 20"  src="#wall" width="9" height="8" depth="0.1" static-body repeat="2 1"></a-box>
+
+            <a-box position="11 2 25" rotation="0 90 0" src="#wall" width="10" height="12" depth="0.1" static-body repeat="2 1"></a-box>
+ 
+            <a-box position="-12 2 25 " rotation="0 90 0" src="#wall" width="10" height="12" depth="0.1" static-body repeat="2 1"></a-box>
+
+
+
+	 <!-- Part 3 -->
+	<a-triangle src="#wall" vertex-a="11 8 20"  vertex-b="11 8 32"  vertex-c="11 20 32" side="double" depth="0.1" static-body repeat="2 1"></a-triangle>
+
+	<a-triangle src="#wall" vertex-a="-12 8 20"  vertex-b="-12 8 32"  vertex-c="-12 20 32" side="double" depth="0.1" static-body repeat="2 1"></a-triangle>
+
+            <a-box position="11 14 46" rotation="0 90 0" src="#wall" width="30" height="12" depth="0.1" static-body repeat="2 1"></a-box>
+
+            <a-box position="-12 14 46" rotation="0 90 0" src="#wall" width="30" height="12" depth="0.1" static-body repeat="2 1"></a-box>
+
+            <a-box position="-4 14 61"  src="#wall" width="16" height="12" depth="0.1" static-body repeat="2 1"></a-box>
+
+            <a-box position="2.5 14 50"  src="#wall" width="17" height="12" depth="0.1" static-body> repeat="2 1"</a-box>
+ 
+            <a-box position="-3.5 14 39"  src="#wall" width="17" height="12" depth="0.1" static-body repeat="2 1"></a-box>
+
+
+            <a-box position="1 4 44.5 " rotation="0 90 0" src="#wall" width="11" height="8" depth="0.1" static-body ></a-box>
+
+            <a-box position="1 4 55.5 " rotation="0 90 0" src="#wall" width="11" height="8" depth="0.1" static-body ></a-box>
+
+            <a-box position="-12 4 50 " rotation="0 90 0" src="#wall" width="22" height="8" depth="0.1" static-body ></a-box>
+
+            <a-box position="-2.5 4 50 " src="#wall" width="7" height="8" depth="0.1" static-body></a-box>
+
+            <a-box position="-5.5 4 39 " src="#wall" width="13" height="8" depth="0.1" static-body></a-box>
+
+            <a-box position="-5.5 4 61 " src="#wall" width="13" height="8" depth="0.1" static-body repeat="2 1"></a-box>
+	
+	
+	<a-plane static-body  rotation="-90 0 0" visible side="double" position="-13 4 50" width="8" height="5"  depth = "3" src="#moving" animation="property: position; to: '-13 4 50'; dur: 5000; easing: linear; loop: true; dir: alternate"></a-plane>
+	
+	<a-entity id = "trophyModel" gltf-model="gltf/trophy/scene.gltf" position="0 9 125" ></a-entity>
+	<a-light type="ambient" intensity="1" color="#ffffff"></a-light>
+	<!--<a-light type="hemisphere" color="#ffffff" groundColor="#444444" intensity="0.25"></a-light>-->
+	<!--<a-light type="directional" position="0 8 123" intensity="0.5" color="#ffffff"></a-light>-->
+
+            <a-box class="ignore-portal" rotation="45 0 0" position="-.5 13.5 25.5"  src="#wall" width="25" height="16.5" depth="0.2" static-body></a-box>
+
+
+	
+
+    </a-entity>
+
+      <a-entity id="cameraRig" position="0 1.6 -2">
+        <a-camera id="camera" kinema-body look-controls = "pointerLockEnabled: true" >
+		
+			  <a-entity id="audioBlue" sound="src:#fireBlue; autoplay:false; positional:false"></a-entity>
+			  <a-entity id="audioOrange" sound="src:#fireOrange; autoplay:false; positional:false"></a-entity>
+			  <a-entity id="audioTeleport" sound="src:#teleport; autoplay:false; positional:false"></a-entity>
+			  <a-entity id="audioCaught" sound="src:#caught; autoplay:false; positional:false"></a-entity>
+			  <a-entity id="audioApplause" sound="src:#applause; autoplay:false; positional:false"></a-entity>
+			 
+          <a-cursor raycaster="objects: .clickable">
+		  	  <a-entity id="transition" geometry="primitive: plane; width:6; height:5" 
+			  material="color:#000; transparent: true; alphaTest: 0.5; opacity:0" position="0 0 -0.5"
+			  animation = "property: material.opacity; from 1; to 0; dur: 1000; startEvents: fadeOut">
+			  </a-entity> 
+			  
+			<a-entity id="welcomeText" position="0 0 -1"
+					 text="value: You Got Caught!; align: center; width: 4; color: red; opacity: 0" 
+					animation="property: text.opacity; from: 1; to: 0; dur: 2500; startEvents: fadeOut; easing: linear;">
+			</a-entity>
+			
+			 <a-entity id="winText" position="0 0 -0.5" scale="1.5 1.5 1.5" 
+			 text="value: Congratulations, You Won!; align: center; width: 4; color: gold; opacity: 0" 
+			 </a-entity>
+			
+	  
+		<a-entity id="hint" position="0 -1 -2"
+		  text="value: ; align: center; width: 4; color: black"
+		  material="opacity: 0"
+		  animation="property: text.opacity; from: 1; to: 0; dur: 1000; startEvents: fadeOut; easing: linear;">
+		</a-entity>
+			  
+		    <a-entity id="cooldownDisplay" color = "white" style="position: absolute; top: 10%; left: 75%; transform: translate(-50%, -50%); 
+       color: white; font-size: 2rem; background-color: rgba(0, 0, 0, 0.7); padding: 10px 20px; border-radius: 10px;z-index: 999;">></a-entity>
+	   
+            <a-image src="#portal_gun" position="1 -0.5 0" scale="1.7 1 1" material="transparent: true; alphaTest: 0.5;"></a-image>
+          </a-cursor>
+        </a-camera>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
